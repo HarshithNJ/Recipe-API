@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface recipeRepository extends JpaRepository<recipe,Integer> {
 
-    boolean existByName(String name);
+    boolean existsByName(String name);
 
 }

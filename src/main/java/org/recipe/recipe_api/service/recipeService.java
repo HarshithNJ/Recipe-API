@@ -17,7 +17,7 @@ public class recipeService {
     recipeRepository repository;
 
     public ResponseEntity<Object> saveRecipe(recipe recipe) {
-        if(repository.existByName(recipe.getName())){
+        if(repository.existsByName(recipe.getName())){
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("error", "Recipe name Alredy Exist");
 
