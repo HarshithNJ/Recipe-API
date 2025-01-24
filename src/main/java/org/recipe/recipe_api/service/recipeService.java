@@ -1,6 +1,7 @@
 package org.recipe.recipe_api.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.recipe.recipe_api.dto.recipe;
@@ -30,6 +31,23 @@ public class recipeService {
             map.put("Data", recipe);
             
             return new ResponseEntity<Object>(map, HttpStatus.CREATED);
+        }
+    }
+
+    public ResponseEntity<Object> getAllRecipes() {
+        List<recipe> li = repository.findAll();
+
+        if(li.isEmpty()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No records found");
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Record successfully created");
+            map.put("Data", li);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
         }
     }
 }

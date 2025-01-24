@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
 
@@ -29,6 +31,21 @@ public class recipeController {
     public ResponseEntity<Object> saveRecipe(@RequestBody recipe recipe) {
         return service.saveRecipe(recipe);
     }
+
+
+
+
+
+
+    /* To fetch recipe the records*/
+    @Operation(summary = "To fetch recipe the records", description = "To fetch all recipe the records")
+    @ApiResponse(responseCode = "302", description = "Record successfully Fetched")
+    @ApiResponse(responseCode = "404", description = "No records found")
+    @GetMapping("/recipes")
+    public ResponseEntity<Object> getAllRecipes() {
+        return service.getAllRecipes();
+    }
+    
     
     
 }
