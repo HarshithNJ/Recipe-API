@@ -95,4 +95,23 @@ public class recipeService {
         }
     }
 
+    public ResponseEntity<Object> deleteById(int id) {
+        Optional<recipe> op = repository.findById(id);
+
+        if(op.isPresent()){
+            repository.deleteById(id);
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Record successfully deleted");
+            map.put("Data", op.get());
+
+            return new ResponseEntity<Object>(map, HttpStatus.OK);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No records found");
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

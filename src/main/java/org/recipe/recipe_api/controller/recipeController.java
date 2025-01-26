@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -62,6 +63,23 @@ public class recipeController {
     @GetMapping("/recipes/{name}")
     public ResponseEntity<Object> getRecipeByName(@PathVariable String name){
         return service.getRecipeByName(name);
+    }
+
+
+
+
+
+
+
+
+
+    /* To Delete By Id */
+    @Operation(summary = "To Delete By Id", description = "To Delete By Id")
+    @ApiResponse(responseCode = "200", description = "Record successfully deleted")
+    @ApiResponse(responseCode = "404", description = "No records found")
+    @DeleteMapping("/recipes/{id}")
+    public ResponseEntity<Object> deleteById(@PathVariable int id){
+        return service.deleteById(id);
     }
     
     
