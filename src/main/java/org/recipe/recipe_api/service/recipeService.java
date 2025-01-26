@@ -34,6 +34,32 @@ public class recipeService {
         }
     }
 
+    public ResponseEntity<Object> saveMultipleRecipes(List<recipe> recipes) {
+        for(recipe recipe : recipes){
+            if(repository.existsByName(recipe.getName())){
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("error", "Recipe name Alredy Exist");
+    
+                return new ResponseEntity<Object>(map, HttpStatus.NOT_ACCEPTABLE);
+            }
+        }
+        repository.saveAll(recipes);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("success", "Record successfully created");
+        map.put("Data", recipes);
+        
+        return new ResponseEntity<Object>(map, HttpStatus.CREATED);
+    }
+
+
+
+
+
+
+
+    
+
     public ResponseEntity<Object> getAllRecipes() {
         List<recipe> li = repository.findAll();
 
@@ -50,4 +76,5 @@ public class recipeService {
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
         }
     }
+
 }

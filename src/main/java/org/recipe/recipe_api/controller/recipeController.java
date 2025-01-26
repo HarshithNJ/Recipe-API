@@ -1,5 +1,7 @@
 package org.recipe.recipe_api.controller;
 
+import java.util.List;
+
 import org.recipe.recipe_api.dto.recipe;
 import org.recipe.recipe_api.service.recipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,13 @@ public class recipeController {
         return service.saveRecipe(recipe);
     }
 
+    @Operation(summary = "To Save the record", description = "To Save the record")
+    @ApiResponse(responseCode = "201", description = "Record successfully created")
+    @ApiResponse(responseCode = "406", description = "Recipe name Alredy Exist")
+    @PostMapping("/recipes/multiple")
+    public ResponseEntity<Object> saveMultipleRecipes(@RequestBody List<recipe> recipes){
+        return service.saveMultipleRecipes(recipes);
+    }
 
 
 
