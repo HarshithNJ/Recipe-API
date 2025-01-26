@@ -3,6 +3,7 @@ package org.recipe.recipe_api.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.recipe.recipe_api.dto.recipe;
 import org.recipe.recipe_api.repository.recipeRepository;
@@ -74,6 +75,23 @@ public class recipeService {
             map.put("Data", li);
 
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
+
+    public ResponseEntity<Object> getRecipeByName(String name) {
+        Optional<recipe> op = repository.findByName(name);
+
+        if(op.isPresent()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Record successfully fetched");
+            map.put("Data", op.get());
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No records found");
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
 

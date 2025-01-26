@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 
@@ -53,6 +54,14 @@ public class recipeController {
     @GetMapping("/recipes")
     public ResponseEntity<Object> getAllRecipes() {
         return service.getAllRecipes();
+    }
+    
+    @Operation(summary = "To fetch recipe the records", description = "To fetch all recipe the records")
+    @ApiResponse(responseCode = "302", description = "Record successfully Fetched")
+    @ApiResponse(responseCode = "404", description = "No records found")
+    @GetMapping("/recipes/{name}")
+    public ResponseEntity<Object> getRecipeByName(@PathVariable String name){
+        return service.getRecipeByName(name);
     }
     
     
